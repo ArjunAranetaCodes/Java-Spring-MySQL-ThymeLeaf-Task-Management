@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+<div class="container mx-auto my-8">
+    <h1 class="text-3xl font-bold mb-4" th:if="${task.id == null}">Create Task</h1>
+    <h1 class="text-3xl font-bold mb-4" th:if="${task.id != null}">Edit Task</h1>
+    <form th:action="@{/task/save}" th:object="${task}" method="post" class="bg-white rounded-lg shadow-md p-6">
+        <input type="hidden" th:field="*{id}" />
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 font-medium mb-2">Title</label>
+            <input type="text" class="border border-gray-300 rounded-md py-2 px-3 w-full" id="title" th:field="*{title}" required>
+        </div>
+        <div class="mb-4">
+            <label for="description" class="block text-gray-700 font-medium mb-2">Description</label>
+            <textarea class="border border-gray-300 rounded-md py-2 px-3 w-full" id="description" th:field="*{description}" rows="3" required></textarea>
+        </div>
+        <div class="mb-4">
+            <div class="flex items-center">
+                <input class="form-checkbox h-5 w-5 text-blue-600" type="checkbox" id="completed" th:field="*{completed}">
+                <label for="completed" class="ml-2 text-gray-700 font-medium">Completed</label>
+            </div>
+        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md">Save</button>
+    </form>
+</div>
+</body>
+</html>

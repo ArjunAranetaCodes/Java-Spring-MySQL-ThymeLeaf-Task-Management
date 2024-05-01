@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+<div class="container mx-auto my-8">
+    <h1 class="text-3xl font-bold mb-4">Task List</h1>
+    <div class="space-y-4">
+        <div th:each="task : ${tasks}" th:classappend="${task.completed ? 'bg-gray-200 line-through text-gray-500' : 'bg-white'}" class="rounded-lg shadow-md p-4">
+            <div class="flex justify-between items-center">
+                <h5 th:text="${task.title}" class="text-lg font-medium"></h5>
+                <div>
+                    <a th:href="@{/task/edit/{id}(id=${task.id})}" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md mr-2">Edit</a>
+                    <a th:href="@{/task/delete/{id}(id=${task.id})}" class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md">Delete</a>
+                </div>
+            </div>
+            <p th:text="${task.description}" class="text-gray-700 mt-2"></p>
+        </div>
+    </div>
+    <a th:href="@{/task/create}" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md mt-4 inline-block">Create Task</a>
+</div>
+</body>
+</html>
